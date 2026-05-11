@@ -3,25 +3,36 @@ import UIKit
 
 class TaskListController: UITableViewController {
     
-    lazy var table: UITableView = {
-        let table = UITableView()
-        table.backgroundColor = .green
-        table.frame = self.view.frame
-        return table
-    }()
+    private var tmpData = ["Steve", "Tim", "Johny"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
-        view.addSubview(table)
+        tableView.frame = self.view.frame
+        tableView.register(TaskCell.self, forCellReuseIdentifier: TaskCell.id)
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        7
+        tmpData.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.id)
+        cell?.textLabel?.text = tmpData[indexPath.row]
+        return cell ?? UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "Секция \(section + 1)"
+    
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        35
     }
     
 }
