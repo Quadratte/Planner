@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Planner
-//
-//  Created by Qd on 11.05.2026.
-//
-
 import UIKit
 import CoreData
 
